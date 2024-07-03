@@ -5,13 +5,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.lopez.app.jpa.dao.IClientesDao;
 import com.lopez.app.jpa.models.Cliente;
 
 @Component
-public class ClientesService  implements IService<Cliente>{
+@Qualifier("clientesViejo")
+public class ClientesService  implements IService<Cliente,Cliente>{
 
 
     @Autowired

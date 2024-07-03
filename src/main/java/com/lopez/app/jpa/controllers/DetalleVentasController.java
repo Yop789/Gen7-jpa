@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lopez.app.jpa.dtos.DetalleVentaDTO;
 import com.lopez.app.jpa.models.DetalleVenta1;
 import com.lopez.app.jpa.services.IService;
 
@@ -23,7 +24,7 @@ import com.lopez.app.jpa.services.IService;
 public class DetalleVentasController {
 
     @Autowired
-    IService<DetalleVenta1> detalleVentasService;
+    IService<DetalleVenta1,DetalleVentaDTO> detalleVentasService;
 
 
 
@@ -33,7 +34,7 @@ public class DetalleVentasController {
     }
 
     @PostMapping
-    public Map<String, String> guardar(@RequestBody DetalleVenta1 d) {
+    public Map<String, String> guardar(@RequestBody DetalleVentaDTO d) {
         detalleVentasService.guardar(d);
         Map<String, String> response = new HashMap<>();
         response.put("msg", "Detalle guardada");
@@ -61,7 +62,7 @@ public class DetalleVentasController {
     }
 
     @PutMapping("/actualizar")
-    public Map<String, String> actualizar(@RequestBody DetalleVenta1 d, @RequestParam(name = "id") Long id) {
+    public Map<String, String> actualizar(@RequestBody DetalleVentaDTO d, @RequestParam(name = "id") Long id) {
         Optional<DetalleVenta1> detalle = detalleVentasService.getById(id);
         if (detalle.isPresent()) {
             d.setId(id);

@@ -23,7 +23,7 @@ import com.lopez.app.jpa.services.IService;
 @RequestMapping("api/productos")
 public class ProductosController  {
     @Autowired
-    IService<Producto> productosService;
+    IService<Producto,Producto> productosService;
 
     @GetMapping
     public List<Producto> getAll() {

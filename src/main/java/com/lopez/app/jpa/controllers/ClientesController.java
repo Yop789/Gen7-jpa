@@ -2,7 +2,10 @@ package com.lopez.app.jpa.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lopez.app.jpa.dtos.VentaDTO;
 import com.lopez.app.jpa.models.Cliente;
+import com.lopez.app.jpa.services.ClienteServicesNuevo;
+import com.lopez.app.jpa.services.ClientesService;
 import com.lopez.app.jpa.services.IService;
 
 import java.util.HashMap;
@@ -11,6 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +28,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("api/clientes")
 
 public class ClientesController {
+
     @Autowired
-    IService<Cliente> clientesService;
+    @Qualifier("clientesViejo")
+    IService<Cliente,Cliente> clientesService;
+    
+    // public ClientesController(ClientesService cs) {
+    //     this.clientesService = cs;
+        
+    // }
+    
+    
 
     @GetMapping
     public List<Cliente> getAll() {

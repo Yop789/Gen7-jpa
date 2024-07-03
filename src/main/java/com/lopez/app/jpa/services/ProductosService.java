@@ -11,7 +11,7 @@ import com.lopez.app.jpa.dao.IProductoDao;
 import com.lopez.app.jpa.models.Producto;
 
 @Component
-public class ProductosService implements IService<Producto>{
+public class ProductosService implements IService<Producto,Producto>{
 
     @Autowired
     private IProductoDao productosDao; 

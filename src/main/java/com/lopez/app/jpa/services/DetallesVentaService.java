@@ -8,15 +8,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lopez.app.jpa.dao.IDetalleVentasDao;
+import com.lopez.app.jpa.dao.IProductoDao;
+import com.lopez.app.jpa.dao.IVentaDao;
+import com.lopez.app.jpa.dtos.DetalleVentaDTO;
 import com.lopez.app.jpa.models.DetalleVenta1;
 
 @Component
-public class DetallesVentaService implements IService<DetalleVenta1>{
+public class DetallesVentaService implements IService<DetalleVenta1,DetalleVentaDTO>{
 
 
     @Autowired
     private IDetalleVentasDao detallesDao;
 
+    @Autowired
+    private IVentaDao ventaDao;
+
+    @Autowired
+    private IProductoDao productoDao;
+    
+
+    
     @Override
     public List<DetalleVenta1> listar() {
         List <DetalleVenta1> detalles = new ArrayList<>();
@@ -31,13 +42,22 @@ public class DetallesVentaService implements IService<DetalleVenta1>{
     }
 
     @Override
-    public void guardar(DetalleVenta1 t) {
-        this.detallesDao.save(t);   
+    public void guardar(DetalleVentaDTO t) {
+        this.detallesDao.save(convertirDTOADetalles(t));   
     }
 
     @Override
     public void eliminar(Long id) {
         this.detallesDao.deleteById(id);
     } 
+
+    private DetalleVenta1 convertirDTOADetalles(DetalleVentaDTO d){
+        DetalleVenta1 detalle = new DetalleVenta1();
+        detalle.setId(d.getId());
+        detalle.setVenta(ventaDao.findById(d.getVenta()).get());
+        detalle.setProducto(productoDao.findById(d.getProducto()).get());
+        detalle.setCantidad(d.getCantidad());
+        return detalle;
+    }
 
 }
