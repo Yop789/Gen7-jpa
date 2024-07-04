@@ -14,8 +14,8 @@ public class Usuario {
 
     @Column(name = "id")
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CUST_SEQ6")
-    @SequenceGenerator(sequenceName = "customer_seq6", allocationSize = 1, name = "CUST_SEQ6")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CUST_SEQ20")
+    @SequenceGenerator(sequenceName = "customer_seq20", allocationSize = 1, name = "CUST_SEQ20")
     private Long id;
 
     private String nombre;
