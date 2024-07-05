@@ -37,4 +37,10 @@ public class ClienteServicesNuevo implements IService<Cliente, Cliente> {
         throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
     }
 
+    @Override
+    public List<Cliente> findByCliente(Long nombre) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findByCliente'");
+    }
+
 }

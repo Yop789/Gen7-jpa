@@ -42,4 +42,10 @@ public class ClientesService  implements IService<Cliente,Cliente>{
         this.clientesDao.deleteById(id);
     }
 
+    @Override
+    public List<Cliente> findByCliente(Long nombre) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findByCliente'");
+    }
+
 }

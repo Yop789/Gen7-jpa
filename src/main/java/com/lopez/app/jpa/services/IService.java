@@ -8,5 +8,6 @@ public interface IService<T,S> {
     Optional<T> getById(Long id);
     void guardar(S t);
     void eliminar(Long id);
+    List<T> findByCliente(Long nombre);
 
 }

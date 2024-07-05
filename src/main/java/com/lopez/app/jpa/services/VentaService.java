@@ -59,4 +59,8 @@ public class VentaService implements IService<Venta,VentaDTO>{
         return venta;
     }
 
+    public List<Venta> findByCliente(Long nombre) {
+        return ventasDao.findByClienteNombreContaining(nombre);
+    }
+
 }

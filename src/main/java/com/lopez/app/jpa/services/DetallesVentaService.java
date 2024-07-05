@@ -60,4 +60,10 @@ public class DetallesVentaService implements IService<DetalleVenta1,DetalleVenta
         return detalle;
     }
 
+    @Override
+    public List<DetalleVenta1> findByCliente(Long nombre) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findByCliente'");
+    }
+
 }

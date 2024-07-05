@@ -39,4 +39,10 @@ public class ProductosService implements IService<Producto,Producto>{
         this.productosDao.deleteById(id);
     }
 
+    @Override
+    public List<Producto> findByCliente(Long nombre) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findByCliente'");
+    }
+
 }
