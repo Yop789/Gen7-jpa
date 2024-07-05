@@ -87,8 +87,8 @@ public class SecurityConfiguration {
         .cors(cors-> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/api/usuarios/**").permitAll()
-                        .requestMatchers(HttpMethod.POST).hasRole("ADMIN")
-                        .anyRequest().authenticated()
+                        // .requestMatchers(HttpMethod.POST).hasRole("ADMIN")
+                        .anyRequest().permitAll()
                 ).sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
