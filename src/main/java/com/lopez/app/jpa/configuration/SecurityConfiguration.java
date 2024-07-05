@@ -105,7 +105,7 @@ public class SecurityConfiguration {
      
        cc.setAllowedOrigins(Arrays.asList("/*"));
       
-       cc.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "PUT", "PATCH"));
+       cc.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "PUT", "PATCH","DELETE"));
       
        cc.addAllowedOriginPattern("*");      
       

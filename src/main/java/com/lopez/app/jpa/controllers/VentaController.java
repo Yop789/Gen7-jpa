@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lopez.app.jpa.dtos.DetalleVentaDTO;
 import com.lopez.app.jpa.dtos.VentaDTO;
+import com.lopez.app.jpa.models.DetalleVenta1;
 import com.lopez.app.jpa.models.Venta;
 import com.lopez.app.jpa.services.IService;
 
@@ -27,6 +29,9 @@ public class VentaController {
 
     @Autowired
     IService<Venta,VentaDTO> ventasService;
+
+    @Autowired
+    IService<DetalleVenta1,DetalleVentaDTO> detalleVentasService;
 
 
     @GetMapping
@@ -65,11 +70,10 @@ public class VentaController {
     }
 
     @PutMapping("/actualizar")
-    public Map<String, String> actualizar(@RequestBody VentaDTO v, @RequestParam(name = "id") Long id) {
+    public Map<String, String> actualizar(@RequestBody VentaDTO v) {
 
-        Optional<Venta> venta = ventasService.getById(id);
+        Optional<Venta> venta = ventasService.getById(v.getId());
         if (venta.isPresent()) {
-            v.setId(id);
             ventasService.guardar(v);
         } else {
             throw new RuntimeException("Venta no encontrada");
@@ -82,7 +86,12 @@ public class VentaController {
 
     @GetMapping("/cliente/{clienteId}")
     public List<Venta> obtenerVentasPorClienteId(@PathVariable (name = "clienteId") Long clienteId) {
-        return ventasService.findByCliente(clienteId);
+        List<Venta> ventas = (List<Venta>) ventasService.findByCliente(clienteId);
+        List<List<DetalleVenta1>> detalle= new ArrayList<>();
+        for (Venta venta : ventas) {
+           detalle.add(detalleVentasService.findByCliente(venta.getId()));
+        } 
+        return ventas;
     }
 
 }

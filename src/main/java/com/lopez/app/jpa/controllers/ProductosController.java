@@ -38,8 +38,8 @@ public class ProductosController  {
         return response;
     }
 
-    @GetMapping("/obtener/{id}")
-    public Producto optenerporId(@RequestParam(name = "id") Long id) {
+    @GetMapping("/{id}")
+    public Producto optenerporId(@PathVariable(name = "id") Long id) {
         Optional<Producto> producto = productosService.getById(id);
         if (producto.isPresent()) {
             return producto.get();
@@ -49,19 +49,18 @@ public class ProductosController  {
     }
 
 
-    @DeleteMapping("/eliminar")
-    public Map<String, String> eliminar(@RequestParam(name = "id") Long id) {
+    @DeleteMapping("/eliminar/{id}")
+    public Map<String, String> eliminar(@PathVariable(name = "id") Long id) {
         productosService.eliminar(id);
         Map<String, String> response = new HashMap<>();
         response.put("msg", "Producto eliminado");
         return response;
     }
 
-    @PutMapping("/actualizar/{id}")
-    public Map<String, String> actualizar(@RequestBody Producto p, @PathVariable(name = "id") Long id) {
-        Optional<Producto> producto = productosService.getById(id);
+    @PutMapping
+    public Map<String, String> actualizar(@RequestBody Producto p) {
+        Optional<Producto> producto = productosService.getById(p.getId());
         if (producto.isPresent()) {
-            p.setId(id);
             productosService.guardar(p);
         } else {
             throw new RuntimeException("No se encontro el producto");

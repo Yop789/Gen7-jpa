@@ -65,19 +65,18 @@ public class ClientesController {
 
     }
 
-    @DeleteMapping("/eliminar")
-    public Map<String, String> eliminar(@RequestParam(name = "id") Long id) {
+    @DeleteMapping("/eliminar/{id}")
+    public Map<String, String> eliminar(@PathVariable(name = "id") Long id) {
         clientesService.eliminar(id);
         Map<String, String> response = new HashMap<>();
         response.put("msg", "Cliente eliminado");
         return response;
     }
 
-    @PutMapping("/actualizar/{id}")
-    public Map<String, String> actualizar(@RequestBody Cliente c, @PathVariable(name = "id") Long id) {
-        Optional<Cliente> cliente = clientesService.getById(id);
+    @PutMapping("/actualizar")
+    public Map<String, String> actualizar(@RequestBody Cliente c) {
+        Optional<Cliente> cliente = clientesService.getById(c.getId());
         if (cliente.isPresent()) {
-            c.setId(id);
             clientesService.guardar(c);
 
         } else {
